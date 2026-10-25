@@ -1,3 +1,3 @@
 ﻿# remove-youtube-suggestions
 
-![[images/16 1.png]] remove-youtube-suggestions
+![[images/16.png]] remove-youtube-suggestions

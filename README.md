@@ -13,3 +13,9 @@
     </td>
   </tr>
 </table>
+
+
+<p align="center">
+  <img src="images/img/1.png" alt="Preview 1" width="48%">
+  <img src="images/img/2.png" alt="Preview 2" width="48%">
+</p>

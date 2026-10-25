@@ -1,0 +1,193 @@
+/* SVG Icon color adaptivity */
+html[dark_mode='false'] { --svg-color: #4b5563; }
+html[dark_mode='true']  { --svg-color: #d1d5db; }
+
+#header-toggle path,
+.dark_mode circle, .dark_mode path {
+  fill: var(--svg-color);
+  transition: fill 0.2s ease;
+}
+
+#header-settings path,
+#header-settings circle {
+  stroke: var(--svg-color);
+  transition: stroke 0.2s ease;
+}
+
+/* Header layout */
+#header {
+  height: var(--header-height);
+  padding: var(--header-padding) 14px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--body-background-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  --icon-dim: 26px;
+}
+
+#header-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+#header-logo {
+  height: var(--icon-dim);
+  width: var(--icon-dim);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#header-logo-link:hover #header-logo {
+  transform: scale(1.05);
+}
+
+#header-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--label-color);
+}
+
+#header-premium-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--blue-color);
+  background-color: var(--selection-bg);
+  padding: 2px 6px;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+}
+
+#header-slot-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background-color: var(--surface-color);
+  border-radius: 99px;
+}
+
+#header-slot-indicator .slot-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--body-color-secondary);
+  opacity: 0.3;
+  transition: all 0.2s ease;
+}
+
+#header-slot-indicator .slot-dot[filled] {
+  background-color: var(--blue-color);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Search Input */
+#search_bar {
+  flex: 1;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+#search_bar input {
+  width: 100%;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+}
+
+#search_bar input:focus {
+  background-color: var(--body-background-color);
+}
+
+/* Action Icons */
+#dark_mode, #power-icon, #header-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  padding: 4px;
+  transition: background-color 0.15s ease;
+}
+
+#dark_mode:hover, #power-icon:hover, #header-settings:hover {
+  background-color: var(--surface-color);
+}
+
+#header-light, #header-dark, #header-settings {
+  height: 20px;
+  width: 20px;
+}
+
+#power-icon svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* Dropdown Menus (Power & Settings) */
+#power-options, #settings-menu {
+  font-size: 13px;
+  position: fixed;
+  z-index: 100;
+  top: calc(var(--header-height) + 6px);
+  padding: 6px;
+  background-color: var(--body-background-color);
+  color: var(--body-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-dropdown);
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  backdrop-filter: blur(8px);
+}
+
+#power-options hr, #settings-menu hr {
+  width: 100%;
+  margin: 4px 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+}
+
+#power-options > *:not(hr), #settings-menu > *:not(hr) {
+  border-radius: var(--border-radius-sm);
+  padding: 7px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#power-options > *:not(hr):hover, #settings-menu > *:not(hr):hover {
+  background-color: var(--blue-color);
+  color: #ffffff !important;
+}
+
+#power-options > *:not(hr):hover *, #settings-menu > *:not(hr):hover * {
+  color: #ffffff !important;
+}
+
+#power-pop-up {
+  position: absolute;
+  z-index: 10;
+  font-size: 0.8rem;
+  width: 200px;
+  top: 120%;
+  right: -50%;
+  border-radius: var(--border-radius);
+  padding: 8px 12px;
+  background-color: var(--label-color);
+  color: var(--body-background-color);
+  box-shadow: var(--shadow-dropdown);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}

@@ -1,0 +1,196 @@
+:root {
+  --header-height: 38px;
+  --header-padding: 6px;
+  --body-height: 440px;
+  --footer-height: 36px;
+
+  --border-radius-sm: 6px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+
+  --red-color: #ff4d4f;
+  --blue-color: #4f46e5;
+  --blue-hover: #4338ca;
+  --light-blue: #6366f1;
+
+  font-size: 15px !important;
+}
+
+html:not([loaded]), html:not([loaded]) body {
+  height: 0 !important;
+  overflow: hidden;
+}
+
+body {
+  margin: auto;
+  width: 620px;
+  height: fit-content;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light Theme */
+html[dark_mode='false'], html:not([dark_mode]) {
+  --body-color: #1f2937;
+  --body-color-secondary: #6b7280;
+  --body-background-color: #ffffff;
+  --surface-color: #f9fafb;
+  --label-color: #111827;
+  --border-color: #e5e7eb;
+  --box-shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --selection-bg: rgba(79, 70, 229, 0.08);
+}
+
+/* Dark Theme */
+html[dark_mode='true'] {
+  --body-color: #e5e7eb;
+  --body-color-secondary: #9ca3af;
+  --body-background-color: #18181b;
+  --surface-color: #27272a;
+  --label-color: #f9fafb;
+  --border-color: #2e2e33;
+  --box-shadow-color: rgba(0, 0, 0, 0.35);
+  --blue-color: #6366f1;
+  --blue-hover: #818cf8;
+  --light-blue: #818cf8;
+  --shadow-dropdown: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px #2e2e33;
+  --selection-bg: rgba(99, 102, 241, 0.15);
+}
+
+body {
+  background-color: var(--body-background-color);
+  color: var(--body-color);
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+*[hidden] {
+  display: none !important;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.removed {
+  display: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background-color: var(--surface-color);
+  color: var(--body-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus {
+  border-color: var(--light-blue);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--body-color-secondary);
+}
+
+/* Announcement Banner */
+.rys_announcement_banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  margin: 10px 12px;
+  background: linear-gradient(135deg, var(--blue-color), var(--light-blue));
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  color: #fff;
+}
+
+.rys_announcement_banner * {
+  color: #fff;
+}
+
+.rys_banner_brand {
+  font-weight: 600;
+  padding-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rys_banner_dismiss,
+.rys_banner_close {
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.rys_banner_dismiss:hover,
+.rys_banner_close:hover {
+  opacity: 1;
+}
+
+.rys_banner_close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+
+/* Управление видимостью служебных экранов и сообщений блокировки */
+html[global_enable="false"] #timer_container,
+html[global_enable="true"][menu_timer="false"] #timer_container,
+html[global_enable="true"][menu_timer="true"]:not([menu_timer_counting_down]) #timer_container,
+html[global_enable="false"] #lock_code_container,
+html[global_enable="true"][lock_code="false"] #lock_code_container,
+html[global_enable="true"][lock_code="true"]:not([entering_lock_code]) #lock_code_container,
+html[global_enable="true"] #disabled_message_container,
+html[global_enable="false"] #main_container {
+  display: none !important;
+}
+
+html[global_enable="false"] #search_bar {
+  visibility: hidden;
+}
+
+/* Скрытие экрана ввода пароля, когда пароль выключен или уже введен */
+html:not([password='true']) #password_lock_container,
+html[passwordentered='true'] #password_lock_container {
+  display: none !important;
+}
+
+/* Скрытие сообщений расписания при активном расширении */
+html[nextTimedChange="false"] #timed-change-message,
+html[schedule='true'][nextTimedChange="false"] #disabled_message,
+html[schedule='true'][nextTimedChange="false"] #turn_back_on,
+html[schedule='false'] #disabled_message_schedule,
+html[schedule='false'] #disabled_message_open_schedule,
+html:not([nextTimedChange="false"]) #disabled_message_schedule,
+html:not([nextTimedChange="false"]) #disabled_message_open_schedule {
+  display: none !important;
+}

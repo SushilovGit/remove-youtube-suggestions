@@ -1,0 +1,40 @@
+#footer {
+  height: var(--footer-height);
+  padding: 0 14px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--body-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#footer a {
+  padding: 4px 10px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--body-color-secondary);
+  transition: all 0.15s ease;
+}
+
+#footer a:hover {
+  color: var(--label-color);
+  background-color: var(--surface-color);
+}
+
+#donate_button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#donate_button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#donate_button:hover svg {
+  transform: scale(1.15);
+}

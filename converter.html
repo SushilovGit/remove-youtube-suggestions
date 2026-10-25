@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Генератор иконок</h3>
+  <button onclick="generateIcons()">Скачать все размеры</button>
+
+  <script>
+    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+      <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4F46E5" />
+          <stop offset="100%" stop-color="#6366F1" />
+        </linearGradient>
+        <linearGradient id="dot" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#93C5FD" />
+          <stop offset="100%" stop-color="#38BDF8" />
+        </linearGradient>
+      </defs>
+      <rect width="128" height="128" rx="36" fill="url(#bg)" />
+      <path d="M38 64 H90" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+      <path d="M38 44 H76" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+      <path d="M38 84 H62" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" />
+      <circle cx="82" cy="84" r="10" fill="url(#dot)" />
+    </svg>`;
+
+    function downloadSize(size) {
+      const img = new Image();
+      const blob = new Blob([svgString], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, size, size);
+
+        const a = document.createElement('a');
+        a.download = `${size}.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    }
+
+    function generateIcons() {
+      [16, 32, 48, 128].forEach(size => setTimeout(() => downloadSize(size), size * 10));
+    }
+  </script>
+</body>
+</html>

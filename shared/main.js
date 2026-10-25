@@ -1,0 +1,929 @@
+
+if (typeof browser === 'undefined') {
+  browser = typeof chrome !== 'undefined' ? chrome : null;
+}
+
+const HOST = 'https://lawrencehook.com/rys/';
+const SECTIONS = [
+  {
+    name: "General",
+    tags: "General",
+    options: [
+      {
+        name: "Hide all Shorts",
+        tags: "Homepage, Subscriptions, Video Player, Search",
+        id: "remove_all_shorts",
+        defaultValue: true,
+      },
+      {
+        name: "Hide video thumbnails",
+        tags: "Homepage, Subscriptions, Video Player, Search",
+        id: "remove_video_thumbnails",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Blur video thumbnails",
+        tags: "Homepage, Subscriptions, Video Player, Search",
+        id: "blur_video_thumbnails",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Shrink video thumbnails",
+        tags: "Homepage, Subscriptions, Video Player, Search",
+        id: "shrink_video_thumbnails",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable play on hover",
+        id: "disable_play_on_hover",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Enable search engine mode",
+        id: "search_engine_mode",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Basic",
+    tags: "Basic",
+    options: [
+      {
+        name: "Hide all homepage suggestions",
+        tags: "Homepage",
+        id: "remove_homepage",
+        defaultValue: true
+      },
+      {
+        name: "Hide sidebar suggestions",
+        tags: "Video Player",
+        id: "remove_sidebar",
+        defaultValue: true
+      },
+      {
+        name: "Hide end-of-video suggestions",
+        tags: "Video Player",
+        id: "remove_end_of_video",
+        defaultValue: true
+      },
+    ]
+  },
+  {
+    name: "Homepage",
+    tags: "Homepage",
+    options: [
+      {
+        name: "Show reveal box for homepage suggestions",
+        id: "add_reveal_homepage",
+        defaultValue: true,
+      },
+      {
+        name: "Hide the header",
+        id: "remove_header",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide all but the first row of suggestions",
+        id: "remove_all_but_one",
+        defaultValue: false,
+        effects: {
+          true: {
+            remove_homepage: false,
+            remove_extra_rows: true,
+            remove_infinite_scroll: true,
+          }
+        },
+        premium: true,
+      },
+      {
+        name: "Hide extra rows (Shorts, Trending, etc.)",
+        id: "remove_extra_rows",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable infinite scroll - homepage",
+        id: "remove_infinite_scroll",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide Playables",
+        id: "remove_playables",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Left Navigation Bar",
+    tags: "Left Navbar",
+    options: [
+      {
+        name: "Hide the entire sidebar",
+        tags: "Basic",
+        id: "remove_left_nav_bar",
+        defaultValue: false,
+        effects: { true: { only_show_playlists: false }},
+      },
+      {
+        name: "Only show playlists",
+        id: "only_show_playlists",
+        defaultValue: false,
+        effects: {
+          true: {
+            remove_left_nav_bar: false,
+            remove_quick_links_section: false,
+            remove_sub_section: true,
+            remove_explore_section: true,
+            remove_more_section: true,
+            remove_settings_section: true,
+            remove_footer_section: true,
+            remove_home_link: true,
+            remove_explore_link: true,
+            remove_shorts_link: true,
+            remove_subscriptions_link: true,
+          }
+        },
+        premium: true,
+      },
+      {
+        name: "Hide the YouTube logo",
+        id: "remove_youtube_logo",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable the YouTube logo link",
+        id: "remove_logo_link",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide button - Home",
+        id: "remove_home_link",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide button - Explore/Trending",
+        id: "remove_explore_link",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide button - Shorts",
+        id: "remove_shorts_link",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide button - Subscriptions",
+        id: "remove_subscriptions_link",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Left Navigation Bar Sections",
+    tags: "Left Navbar",
+    options: [
+      {
+        name: "Hide section - Subscriptions",
+        id: "remove_sub_section",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide section - You/Library",
+        id: "remove_quick_links_section",
+        defaultValue: false,
+        effects: { true: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide section - Explore",
+        id: "remove_explore_section",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide section - More from YouTube",
+        id: "remove_more_section",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide section - Settings",
+        id: "remove_settings_section",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+      {
+        name: "Hide section - Footer",
+        id: "remove_footer_section",
+        defaultValue: false,
+        effects: { false: { only_show_playlists: false }},
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Video Player - UX",
+    tags: "Video Player",
+    options: [
+      {
+        name: "Speed through ads",
+        tags: "Basic",
+        id: "auto_skip_ads",
+        defaultValue: false,
+      },
+      {
+        name: "Disable autoplay",
+        id: "disable_autoplay",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable ambient mode",
+        id: "disable_ambient_mode",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable annotations",
+        id: "disable_annotations",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Auto-expand the description",
+        id: "expand_description",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable scroll in fullscreen",
+        id: "disable_fullscreen_scroll",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Redirect shorts to the default viewer",
+        tags: "Redirects, Basic",
+        id: "normalize_shorts",
+        defaultValue: false,
+      },
+      {
+        name: "Enable theater mode",
+        id: "enable_theater",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Video Player - UI",
+    tags: "Video Player",
+    options: [
+      {
+        name: "Show reveal box for end-of-video suggestions",
+        id: "add_reveal_end_of_video",
+        defaultValue: true,
+      },
+      {
+        name: "Hide info cards",
+        id: "remove_info_cards",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide overlay suggestions",
+        id: "remove_overlay_suggestions",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the play next button",
+        id: "remove_play_next_button",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the menu buttons - Like, Share, etc.",
+        id: "remove_menu_buttons",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the clip button",
+        id: "remove_clip_button",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the likes",
+        id: "remove_video_likes",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide channel subscribers count",
+        id: "remove_channel_subscribers",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the description",
+        id: "remove_vid_description",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide panel - \"More Videos\" in embedded player",
+        id: "remove_embedded_more_videos",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Video Player - Sidebar",
+    tags: "Video Player",
+    options: [
+      {
+        name: "Show reveal box for sidebar suggestions",
+        id: "add_reveal_sidebar",
+        defaultValue: true,
+      },
+      {
+        name: "Center contents - removes the sidebar",
+        id: "remove_entire_sidebar",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable infinite scroll - sidebar",
+        id: "remove_sidebar_infinite_scroll",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide extra sidebar tags (English only)",
+        id: "remove_extra_sidebar_tags",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the live-stream chat",
+        id: "remove_chat",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Video Player - Comments",
+    tags: "Video Player",
+    options: [
+      {
+        name: "Hide all comments",
+        tags: "Basic",
+        id: "remove_comments",
+        defaultValue: false,
+      },
+      {
+        name: "Hide all but the timestamped comments",
+        id: "remove_non_timestamp_comments",
+        defaultValue: false,
+        effects: {
+          true: {
+            remove_comments: false
+          }
+        },
+        premium: true,
+      },
+      {
+        name: "Hide comment usernames",
+        id: "remove_comment_usernames",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide comment profile pictures",
+        id: "remove_comment_profiles",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide comment replies",
+        id: "remove_comment_replies",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide comment upvotes",
+        id: "remove_comment_upvotes",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Search Results",
+    tags: "Search",
+    options: [
+      {
+        name: "Hide search bar suggestions",
+        tags: "Basic",
+        id: "remove_search_suggestions",
+        defaultValue: false,
+      },
+      {
+        name: "Hide promoted videos",
+        id: "remove_search_promoted",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide results - shorts",
+        id: "remove_shorts_results",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide result description",
+        id: "remove_results_description",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide results - For You, Trending, etc.",
+        id: "remove_extra_results",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable the thumbnail slideshow - on hover",
+        id: "remove_thumbnail_mouseover_effect",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Disable infinite scroll - search results",
+        id: "remove_infinite_scroll_search",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Channel Page",
+    tags: "Channel",
+    options: [
+      {
+        name: "Disable autoplay - channel page",
+        id: "disable_channel_autoplay",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the For You section - channel page (English only)",
+        id: "remove_channel_for_you",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Reverse sort channel videos: oldest, least popular",
+        id: "reverse_channel_video_list",
+        defaultValue: false,
+        premium: true,
+      },
+    ]
+  },
+  {
+    name: "Subscriptions Page",
+    tags: "Subscriptions",
+    options: [
+      {
+        name: "Hide shorts",
+        id: "remove_sub_shorts",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide \"Most relevant\" section",
+        id: "remove_sub_most_relevant",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide live videos",
+        id: "remove_sub_live",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide upcoming videos",
+        id: "remove_sub_upcoming",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide premiere videos",
+        id: "remove_sub_premiere",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide VODs (English only)",
+        id: "remove_sub_vods",
+        defaultValue: false,
+        premium: true,
+      }
+    ]
+  },
+  {
+    name: "Redirect the Homepage",
+    tags: "Redirects",
+    options: [
+      {
+        name: "Redirect home to Subscriptions",
+        id: "redirect_to_subs",
+        defaultValue: false,
+        effects: {
+          true: {
+            redirect_to_wl: false,
+            redirect_to_library: false,
+            redirect_off: false
+          },
+          false: {
+            redirect_off: true
+          }
+        },
+      },
+      {
+        name: "Redirect home to Watch Later",
+        id: "redirect_to_wl",
+        defaultValue: false,
+        effects: {
+          true: {
+            redirect_to_subs: false,
+            redirect_to_library: false,
+            redirect_off: false
+          },
+          false: {
+            redirect_off: true
+          }
+        },
+      },
+      {
+        name: "Redirect home to Library",
+        id: "redirect_to_library",
+        defaultValue: false,
+        effects: {
+          true: {
+            redirect_to_subs: false,
+            redirect_to_wl: false,
+            redirect_off: false
+          },
+          false: {
+            redirect_off: true
+          }
+        },
+      },
+      {
+        name: "Do not redirect home",
+        id: "redirect_off",
+        defaultValue: false,
+        display: false,
+      },
+    ]
+  },
+  {
+    name: "Other",
+    tags: "Other",
+    options: [
+      {
+        name: "Hide playlist suggestions",
+        id: "remove_playlist_suggestions",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Hide the notification bell",
+        id: "remove_notif_bell",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Autofocus the search bar",
+        id: "autofocus_search",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Remove context boxes",
+        id: "remove_context",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Enable grayscale mode",
+        id: "grayscale_mode",
+        defaultValue: false,
+        premium: true,
+      },
+      {
+        name: "Lock settings - 10 second timer",
+        id: "menu_timer",
+        defaultValue: false,
+        effects: {
+          true: {
+            lock_code: false,
+          }
+        },
+        premium: true,
+      },
+      {
+        name: "Lock settings - code entry",
+        id: "lock_code",
+        defaultValue: false,
+        effects: {
+          true: {
+            menu_timer: false,
+          }
+        },
+        premium: true,
+      },
+      {
+        name: "Enable power button during schedule",
+        id: "power_btn_active_during_schedule",
+        defaultValue: false,
+        premium: true,
+      },
+    ],
+  },
+];
+
+const TIMED_SETTINGS = {
+  nextTimedChange: false,
+  nextTimedValue: true,
+};
+
+const SCHEDULE_SETTINGS = {
+  schedule: false,
+  scheduleTimes: '9:00a-5:00p',
+  scheduleDays: 'mo,tu,we,th,fr',
+};
+
+const PASSWORD_SETTINGS = {
+  "password": false,
+  "hashed_password": '',
+}
+
+const OTHER_SETTINGS = {
+  global_enable: true,
+  dark_mode: false,
+  log_enabled: false,
+  log_prompt_answered: false,
+  grayscale_exempt_channels: '',
+  ...TIMED_SETTINGS,
+  ...SCHEDULE_SETTINGS,
+  ...PASSWORD_SETTINGS,
+};
+
+const DEFAULT_SETTINGS = SECTIONS.reduce((acc, fieldset) => {
+  fieldset.options.forEach(option => acc[option.id] = option.defaultValue);
+  return acc;
+}, { ...OTHER_SETTINGS });
+
+// Migrate legacy add_reveal_button to per-surface settings
+function migrateRevealSettings(settings) {
+  if (!settings || !('add_reveal_button' in settings)) return {};
+  const val = settings.add_reveal_button;
+  const updates = {};
+  if (!('add_reveal_homepage' in settings)) {
+    settings.add_reveal_homepage = val;
+    updates.add_reveal_homepage = val;
+  }
+  if (!('add_reveal_sidebar' in settings)) {
+    settings.add_reveal_sidebar = val;
+    updates.add_reveal_sidebar = val;
+  }
+  if (!('add_reveal_end_of_video' in settings)) {
+    settings.add_reveal_end_of_video = val;
+    updates.add_reveal_end_of_video = val;
+  }
+  return updates;
+}
+
+
+// For import/export
+const idToShortId = {
+  "global_enable":                      '0',
+  "dark_mode":                          '1',
+  "log_enabled":                        '2',
+  "remove_homepage":                    '3',
+  "remove_sidebar":                     '4',
+  "remove_end_of_video":                '5',
+  "remove_header":                      '6',
+  "remove_all_but_one":                 '7',
+  "remove_extra_rows":                  '8',
+  "remove_infinite_scroll":             '9',
+  "disable_play_on_hover":             '10',
+  "remove_left_nav_bar":               '11',
+  "remove_logo_link":                  '12',
+  "remove_home_link":                  '13',
+  "remove_explore_link":               '14',
+  "remove_shorts_link":                '15',
+  "remove_subscriptions_link":         '16',
+  "remove_quick_links_section":        '17',
+  "remove_sub_section":                '18',
+  "remove_explore_section":            '19',
+  "remove_more_section":               '20',
+  "auto_skip_ads":                     '21',
+  "disable_autoplay":                  '22',
+  "disable_ambient_mode":              '23',
+  "disable_annotations":               '24',
+  "disable_playlist_autoplay":         '25', // deprecated
+  "normalize_shorts":                  '26',
+  "remove_entire_sidebar":             '27',
+  "remove_info_cards":                 '28',
+  "remove_overlay_suggestions":        '29',
+  "remove_play_next_button":           '30',
+  "remove_menu_buttons":               '31',
+  "remove_chat":                       '32',
+  "remove_embedded_more_videos":       '33',
+  "remove_comments":                   '34',
+  "remove_non_timestamp_comments":     '35',
+  "remove_comment_usernames":          '36',
+  "remove_comment_profiles":           '37',
+  "remove_comment_replies":            '38',
+  "remove_comment_upvotes":            '39',
+  "remove_search_suggestions":         '40',
+  "remove_search_promoted":            '41',
+  "remove_shorts_results":             '42',
+  "remove_extra_results":              '43',
+  "remove_thumbnail_mouseover_effect": '44',
+  "remove_sub_shorts":                 '45',
+  "remove_sub_live":                   '46',
+  "remove_sub_upcoming":               '47',
+  "remove_sub_premiere":               '48',
+  "redirect_to_subs":                  '49',
+  "redirect_to_wl":                    '50',
+  "redirect_to_library":               '51',
+  "redirect_off":                      '52',
+  "menu_timer":                        '53',
+  "remove_all_shorts":                 '54',
+  "remove_video_thumbnails":           '55',
+  "search_engine_mode":                '56',
+  "remove_notif_bell":                 '57',
+  "schedule":                          '58',
+  "scheduleTimes":                     '59',
+  "scheduleDays":                      '60',
+  "nextTimedChange":                   '61',
+  "nextTimedValue":                    '62',
+  "remove_settings_section":           '63',
+  "remove_footer_section":             '64',
+  "remove_infinite_scroll_search":     '65',
+  "autofocus_search":                  '66',
+  "remove_playlist_suggestions":       '67',
+  "reverse_channel_video_list":        '68',
+  "expand_description":                '69',
+  "remove_context":                    '70',
+  "remove_sub_vods":                   '71',
+  "disable_channel_autoplay":          '72',
+  "remove_vid_description":            '73',
+  "blur_video_thumbnails":             '74',
+  "remove_extra_sidebar_tags":         '75',
+  "remove_video_likes":                '76',
+  "remove_channel_for_you":            '77',
+  "disable_fullscreen_scroll":         '78',
+  "only_show_playlists":               '79',
+  "remove_channel_subscribers":        '80',
+  "grayscale_mode":                    '81',
+  "lock_code":                         '82',
+  "remove_clip_button":                '83',
+  "shrink_video_thumbnails":           '84',
+  "password":                          '85',
+  "hashed_password":                   '86',
+  "add_reveal_homepage":               '87',
+  "add_reveal_sidebar":                '88',
+  "add_reveal_end_of_video":           '89',
+  "add_reveal_button":                 '90', // deprecated; migrated to add_reveal_* settings
+  "remove_sidebar_infinite_scroll":    '91',
+  "log_prompt_answered":               '92',
+  "remove_results_description":        '93',
+  "enable_theater":                    '94',
+  "remove_playables":                  '95',
+  "remove_sub_most_relevant":          '96',
+  "remove_youtube_logo":              '97',
+  "grayscale_exempt_channels":         '98',
+  "power_btn_active_during_schedule":  '99',
+};
+
+
+const shortIdToId = Object.entries(idToShortId).reduce((acc, [id, shortId]) => {
+  acc[shortId] = id;
+  return acc;
+}, {});
+
+
+function sectionNameToUrl(name) {
+  const sectionPath = name.
+                        toLowerCase().
+                        replaceAll(' - ', '_').
+                        replaceAll(' ', '_');
+
+  return HOST + 'features/' + sectionPath + '/';
+}
+
+
+// Premium features in SECTIONS plus menu-level premium toggles (schedule, password).
+// Together these form the pool of features a slot-budgeted free user can activate.
+const PREMIUM_FEATURE_IDS = [
+  ...SECTIONS.flatMap(section =>
+    section.options.filter(opt => opt.premium).map(opt => opt.id)
+  ),
+  'schedule',
+  'password',
+];
+const PREMIUM_FEATURE_ID_SET = new Set(PREMIUM_FEATURE_IDS);
+
+function countActivePremium(cache) {
+  let n = 0;
+  PREMIUM_FEATURE_IDS.forEach(id => { if (cache[id] === true) n++; });
+  return n;
+}
+
+// Mutates `settings` to force every premium feature off. In-memory only —
+// does not return a write-back map because callers intentionally leave stored
+// values alone so the user's premium state returns on re-upgrade.
+function clearAllPremium(settings) {
+  PREMIUM_FEATURE_IDS.forEach(id => { settings[id] = false; });
+}
+
+// Mutates `settings` so at most `slotLimit` premium features stay true (by
+// iteration order). Returns a map of the cleared settings for callers that
+// need to sync UI state. In-memory only, like clearAllPremium — callers must
+// never persist the cleared values; stored preferences stay intact so the
+// user's premium state returns when access returns.
+function enforceSlotBudget(settings, slotLimit) {
+  const writeBack = {};
+  let kept = 0;
+  PREMIUM_FEATURE_IDS.forEach(id => {
+    if (settings[id] !== true) return;
+    if (kept < slotLimit) {
+      kept++;
+    } else {
+      settings[id] = false;
+      writeBack[id] = false;
+    }
+  });
+  return writeBack;
+}
+
+// Grayscale color exceptions: parse the user's comma-separated channel list
+// into normalized, deduplicated @handles (lowercased for comparison).
+function parseGrayscaleExemptChannels(str) {
+  if (!str || typeof str !== 'string') return [];
+  const handles = str.split(',')
+    .map(t => t.trim())
+    .filter(Boolean)
+    .map(t => (t.startsWith('@') ? t : '@' + t).toLowerCase());
+  return Array.from(new Set(handles));
+}
+
+// True when a YouTube path (or channel-link href) belongs to one of the
+// exempt @handles. Matches the first path segment exactly, so "@veri" never
+// matches "/@veritasium" and deeper paths like "/@handle/videos" still match.
+function isGrayscaleExemptPath(pathname, handles) {
+  if (!pathname || !handles || !handles.length) return false;
+  let seg = pathname.split('/').find(Boolean);
+  if (!seg) return false;
+  // Browser pathnames encode non-ASCII handles; DOM hrefs may be literal.
+  try {
+    seg = decodeURIComponent(seg);
+  } catch {
+    return false;
+  }
+  if (!seg || !seg.startsWith('@')) return false;
+  return handles.includes(seg.toLowerCase());
+}

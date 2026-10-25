@@ -1,0 +1,570 @@
+
+html[global_enable="true"] #masthead-ad,
+html[global_enable="true"] ytd-mealbar-promo-renderer,
+html[global_enable="true"] ytd-carousel-ad-renderer,
+html[global_enable="true"] .ytd-display-ad-renderer,
+html[global_enable="true"] ytd-ad-slot-renderer,
+html[global_enable="true"] ytd-action-companion-ad-renderer,
+html[global_enable="true"] ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"],
+
+/* General */
+html[global_enable="true"][remove_all_shorts="true"] a[title="Shorts"],
+html[global_enable="true"][remove_all_shorts="true"] *[is_short],
+html[global_enable="true"][remove_all_shorts="true"] ytd-reel-shelf-renderer,
+html[global_enable="true"][remove_all_shorts="true"] grid-shelf-view-model.ytGridShelfViewModelHostHasBottomButton.ytd-item-section-renderer.ytGridShelfViewModelHost,
+html[global_enable="true"][remove_all_shorts="true"] grid-shelf-view-model.ytGridShelfViewModelHost.ytd-item-section-renderer,
+html[global_enable="true"][remove_video_thumbnails="true"] ytd-thumbnail,
+html[global_enable="true"][remove_video_thumbnails="true"] yt-thumbnail-view-model,
+html[global_enable="true"][disable_play_on_hover="true"] #video-preview,
+html[global_enable="true"][disable_play_on_hover="true"] ytd-thumbnail-overlay-loading-preview-renderer[is-preview-loading],
+
+/* Main */
+html[global_enable="true"][remove_homepage="true"] ytd-browse[page-subtype="home"],
+html[global_enable="true"][remove_sidebar="true"] #secondary > div.circle,
+html[global_enable="true"][remove_sidebar="true"] #related,
+html[global_enable="true"][remove_end_of_video="true"] .html5-endscreen,
+html[global_enable="true"][remove_end_of_video="true"] .ytp-fullscreen-grid-stills-container,
+
+/* Left Bar Navigation */
+html[global_enable="true"][remove_left_nav_bar="true"] tp-yt-app-drawer#guide,
+html[global_enable="true"][remove_left_nav_bar="true"] ytd-mini-guide-renderer[role="navigation"],
+html[global_enable="true"][remove_left_nav_bar="true"] yt-icon-button#guide-button,
+
+html[global_enable="true"][only_show_playlists="true"] ytd-guide-collapsible-section-entry-renderer #header,
+/* Keep only "You" entries that link to playlists (Playlists, Watch later,
+   Liked videos, and saved playlists); YouTube reorders these, so match by
+   link rather than position. */
+html[global_enable="true"][only_show_playlists="true"] #section-items > :not(:has(a[href^="/playlist"], a[href="/feed/playlists"])),
+html[global_enable="true"][only_show_playlists="true"] ytd-guide-collapsible-entry-renderer #expanded > ytd-guide-entry-renderer,
+
+html[global_enable="true"][remove_home_link="true"] a:not(#logo)[href="/"],
+html[global_enable="true"][remove_explore_link="true"] a[href="/feed/trending"],
+html[global_enable="true"][remove_explore_link="true"] a[href="/feed/explore"],
+html[global_enable="true"][remove_shorts_link="true"] a[title="Shorts"],
+html[global_enable="true"][remove_shorts_link="true"] ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+html[global_enable="true"][remove_subscriptions_link="true"] a[href="/feed/subscriptions"],
+
+/* Left Bar Navigation Sections */
+/* Left-nav sections, matched by the links they contain. Their positions
+   differ between signed-in and signed-out YouTube, so nth-of-type hid the
+   wrong section. The top section (with the Home link) is never matched. */
+html[global_enable="true"][remove_sub_section="true"]         ytd-guide-section-renderer:has(a[href="/feed/subscriptions"]):not(:has(a[href="/"])),
+html[global_enable="true"][remove_quick_links_section="true"] ytd-guide-section-renderer:has(a[href="/feed/history"]):not(:has(a[href="/"])),
+html[global_enable="true"][remove_explore_section="true"]     ytd-guide-section-renderer:has(a[href="/feed/storefront"], a[href="/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ"]),
+html[global_enable="true"][remove_more_section="true"]        ytd-guide-section-renderer:has(a[href="/premium"], a[href^="https://music.youtube.com"], a[href^="https://www.youtubekids.com"]),
+html[global_enable="true"][remove_settings_section="true"]    ytd-guide-section-renderer:has(a[href="/reporthistory"], a[href="/account"]),
+html[global_enable="true"][remove_footer_section="true"]      #guide-renderer > div#footer,
+
+
+/* Homepage */
+html[global_enable="true"][remove_header="true"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > div#header,
+html[global_enable="true"][remove_all_but_one="true"] ytd-rich-item-renderer[rys-hidden-row],
+html[global_enable="true"][remove_all_but_one="true"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-continuation-item-renderer,
+html[global_enable="true"][remove_extra_rows="true"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-rich-section-renderer,
+html[global_enable="true"][remove_infinite_scroll="true"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-continuation-item-renderer,
+html[global_enable="true"][remove_playables="true"] *[is_playable],
+
+/* Video Player - UX */
+html[global_enable="true"][disable_fullscreen_scroll="true"] ytd-watch-flexy[fullscreen] div#columns,
+
+/* Video Player - UI*/
+/* Watch page only: other pages reuse #secondary (history keeps its search bar there). */
+html[global_enable="true"][remove_entire_sidebar="true"] ytd-watch-flexy #secondary,
+html[global_enable="true"][remove_sidebar_infinite_scroll="true"] #secondary #contents ytd-continuation-item-renderer,
+html[global_enable="true"][remove_extra_sidebar_tags="true"] yt-chip-cloud-chip-renderer[hide-chip],
+html[global_enable="true"][remove_chat="true"] #chat,
+
+/* Video Player - UI*/
+html[global_enable="true"][remove_play_next_button="true"] a.ytp-next-button,
+html[global_enable="true"][remove_info_cards="true"] .ytp-ce-element.ytp-ce-element,
+html[global_enable="true"][remove_vid_description="true"] ytd-watch-metadata #description,
+html[global_enable="true"][remove_menu_buttons="true"] #menu-container,
+html[global_enable="true"][remove_menu_buttons="true"] #actions,
+html[global_enable="true"][remove_clip_button="true"] #menu button[scissor_button],
+html[global_enable="true"][remove_video_likes="true"] like-button-view-model .yt-spec-button-shape-next__button-text-content,
+html[global_enable="true"][remove_video_likes="true"] like-button-view-model .ytSpecButtonShapeNextButtonTextContent,
+html[global_enable="true"][remove_channel_subscribers="true"] #owner-sub-count,
+html[global_enable="true"][remove_embedded_more_videos="true"] div.ytp-pause-overlay,
+html[global_enable="true"][remove_overlay_suggestions="true"] .ytp-cards-teaser,
+html[global_enable="true"][remove_overlay_suggestions="true"] button.ytp-button.ytp-cards-button,
+
+/* Video Player - Comments */
+html[global_enable="true"][remove_comments="true"] #comments,
+html[global_enable="true"][remove_comments="true"] #comment-teaser,
+html[global_enable="true"][remove_comments="true"] ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"],
+html[global_enable="true"][remove_non_timestamp_comments="true"] ytd-comment-thread-renderer:not([timestamp_comment]),
+html[global_enable="true"][remove_comment_usernames="true"] #author-text,
+html[global_enable="true"][remove_comment_profiles="true"] #author-thumbnail,
+html[global_enable="true"][remove_comment_replies="true"] #replies.ytd-comment-thread-renderer,
+html[global_enable="true"][remove_comment_upvotes="true"] #vote-count-middle.ytd-comment-action-buttons-renderer,
+html[global_enable="true"][remove_comment_upvotes="true"] #vote-count-middle.ytd-comment-engagement-bar,
+
+/* Search Results Page */
+html[global_enable="true"][remove_search_suggestions="true"] div.sbdd_a,
+html[global_enable="true"][remove_search_promoted="true"] #container.ytd-search ytd-search-pyv-renderer,
+html[global_enable="true"][remove_shorts_results="true"] #container.ytd-search ytd-video-renderer[is_short="true"],
+
+html[global_enable="true"][remove_results_description="true"] #contents .metadata-snippet-container,
+html[global_enable="true"][remove_results_description="true"] #contents .metadata-snippet-container-one-line,
+html[global_enable="true"][remove_results_description="true"] #contents #description-text,
+html[global_enable="true"][remove_results_description="true"] #contents #description,
+html[global_enable="true"][remove_results_description="true"] #contents ytd-expandable-metadata-renderer,
+html[global_enable="true"][remove_results_description="true"] #contents ytd-badge-supported-renderer,
+
+html[global_enable="true"][remove_shorts_results="true"] #container.ytd-search ytd-reel-shelf-renderer,
+html[global_enable="true"][remove_shorts_results="true"] #container.ytd-search grid-shelf-view-model.ytGridShelfViewModelHostHasBottomButton.ytd-item-section-renderer.ytGridShelfViewModelHost,
+html[global_enable="true"][remove_shorts_results="true"] #container.ytd-search grid-shelf-view-model.ytGridShelfViewModelHost.ytd-item-section-renderer,
+html[global_enable="true"][remove_extra_results="true"] #container.ytd-search ytd-shelf-renderer,
+html[global_enable="true"][remove_thumbnail_mouseover_effect="true"] #mouseover-overlay,
+html[global_enable="true"][remove_infinite_scroll_search="true"] .ytd-search #contents > ytd-continuation-item-renderer,
+
+/* Channel Page */
+html[global_enable="true"][remove_channel_for_you="true"] *[is-channel-for-you-section],
+
+/* Subscriptions Page */
+html[global_enable="true"][remove_sub_shorts="true"]   ytd-grid-video-renderer[is_sub_short],
+html[global_enable="true"][remove_sub_live="true"]     ytd-grid-video-renderer[badge-text="live"],
+html[global_enable="true"][remove_sub_upcoming="true"] ytd-grid-video-renderer[badge-text="upcoming"],
+html[global_enable="true"][remove_sub_premiere="true"] ytd-grid-video-renderer[badge-text="premiere"],
+html[global_enable="true"][remove_sub_vods="true"]     ytd-grid-video-renderer[is_vod],
+
+html[global_enable="true"][remove_sub_shorts="true"]   ytd-rich-item-renderer[is_sub_short],
+html[global_enable="true"][remove_sub_live="true"]     ytd-rich-item-renderer[badge-text="live"],
+html[global_enable="true"][remove_sub_upcoming="true"] ytd-rich-item-renderer[badge-text="upcoming"],
+html[global_enable="true"][remove_sub_premiere="true"] ytd-rich-item-renderer[badge-text="premiere"],
+html[global_enable="true"][remove_sub_vods="true"]     ytd-rich-item-renderer[is_vod],
+
+html[global_enable="true"][remove_sub_shorts="true"]   ytd-rich-section-renderer[is_sub_short],
+html[global_enable="true"][remove_sub_most_relevant="true"] ytd-rich-section-renderer[is_most_relevant],
+
+/* Other */
+html[global_enable="true"][remove_notif_bell="true"] ytd-notification-topbar-button-renderer,
+html[global_enable="true"][remove_playlist_suggestions="true"] ytd-item-section-renderer[is-playlist-suggestions],
+html[global_enable="true"][remove_context="true"] ytd-info-panel-container-renderer,
+
+html[global_enable="true"][foo=bar] {
+	display: none !important;
+}
+
+
+/* Hide the top-left YouTube logo, including its country label. */
+html[global_enable="true"][remove_youtube_logo="true"] ytd-topbar-logo-renderer {
+  display: none !important;
+}
+
+/* Disable Youtube logo's link to the homepage */
+html[global_enable="true"][remove_logo_link="true"] #logo[href="/"] {
+  pointer-events: none;
+}
+
+
+/* Center contents when the left nav bar is entirely hidden */
+html[global_enable="true"][remove_left_nav_bar="true"] ytd-app[guide-persistent-and-visible] ytd-page-manager.ytd-app,
+html[global_enable="true"][remove_left_nav_bar="true"] ytd-app[mini-guide-visible] ytd-page-manager.ytd-app,
+html[global_enable="true"][remove_left_nav_bar="true"] ytd-playlist-sidebar-renderer,
+html[global_enable="true"][remove_left_nav_bar="true"] ytd-playlist-header-renderer,
+
+html[global_enable="true"][foo=bar] {
+	margin-left: 0px;
+	left: 0;
+}
+
+
+/* Center contents when the sidebar is entirely hidden */
+html[global_enable="true"][remove_entire_sidebar="true"] ytd-watch-flexy[flexy][is-two-columns_]:not([fullscreen]):not([theater]),
+html[global_enable="true"][search_engine_mode="true"] ytd-watch-flexy[flexy][is-two-columns_]:not([fullscreen]):not([theater]),
+html[foobar] {
+	--ytd-watch-flexy-max-player-width: calc(var(--ytd-watch-flexy-chat-max-height)*var(--ytd-watch-flexy-width-ratio)/var(--ytd-watch-flexy-height-ratio)) !important;
+}
+html[global_enable="true"][remove_entire_sidebar="true"] #columns {
+	justify-content: center;
+}
+
+/* Reverse channel videos list */
+html[global_enable="true"][reverse_channel_video_list="true"] ytd-browse[page-subtype="channels"] #contents.ytd-rich-grid-renderer {
+	flex-direction: column-reverse;
+}
+
+
+/* Blur thumbnails */
+html[global_enable="true"][blur_video_thumbnails="true"] ytd-thumbnail img,
+html[global_enable="true"][blur_video_thumbnails="true"] ytd-playlist-thumbnail img,
+html[global_enable="true"][blur_video_thumbnails="true"] yt-thumbnail-view-model img,
+html[global_enable="true"][blur_video_thumbnails="true"] .video-thumbnail-img {
+  filter: blur(20px);
+}
+
+
+/* Shrink thumbnails */
+html[global_enable="true"][shrink_video_thumbnails="true"] ytd-thumbnail,
+html[global_enable="true"][shrink_video_thumbnails="true"] ytd-rich-item-renderer yt-thumbnail-view-model,
+html[global_enable="true"][shrink_video_thumbnails="true"] ytd-playlist-thumbnail,
+html[global_enable="true"][shrink_video_thumbnails="true"] *:has(> yt-collection-thumbnail-view-model),
+html[global_enable="true"][shrink_video_thumbnails="true"] ytd-channel-renderer #avatar-section,
+html[global_enable="true"][shrink_video_thumbnails="true"] ytd-movie-renderer .thumbnail-container {
+  max-width: 240px !important;
+  min-width: 210px !important;
+  max-height: 134px;
+}
+
+
+/* Subs page */
+html[global_enable="true"] ytd-rich-grid-row[empty="false"],
+html[global_enable="true"] ytd-rich-grid-row[empty="false"] #contents {
+	width: fit-content;
+}
+html[global_enable="true"] ytd-rich-grid-row[empty="true"] {
+	width: 0;
+}
+html[global_enable="true"] ytd-rich-grid-row[empty="true"] #contents {
+	margin: 0;
+}
+
+
+/* Reveal suggestions box */
+.rys_reveal_box {
+	--rys-reveal-text: #606060;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+	padding: 10px 16px;
+	margin: auto;
+	margin-top: 15%;
+	border-radius: 12px;
+	font-size: 14px;
+	font-family: var(--rys-font);
+	z-index: 1;
+	position: relative;
+	width: fit-content;
+}
+
+html[dark] .rys_reveal_box {
+	--rys-reveal-text: #aaa;
+}
+
+.rys_reveal_box * {
+	color: var(--rys-reveal-text);
+}
+
+.rys_reveal_actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.rys_reveal_show {
+	padding: 6px 0;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.rys_reveal_show:hover {
+	text-decoration: underline;
+}
+
+.rys_reveal_dismiss {
+	cursor: pointer;
+	font-size: 11px;
+	white-space: nowrap;
+	opacity: 0.5;
+	text-decoration: none;
+	transition: opacity 0.15s ease;
+}
+
+.rys_reveal_dismiss:hover {
+	opacity: 1;
+	text-decoration: underline;
+}
+
+.rys_reveal_close {
+	background: none;
+	border: none;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 2px 4px;
+	opacity: 0.6;
+	line-height: 1;
+	color: var(--rys-reveal-text);
+	transition: opacity 0.15s ease;
+	display: flex;
+	align-items: center;
+}
+
+.rys_reveal_close:hover {
+	opacity: 1;
+}
+
+html:not([global_enable="true"]) #rys_homepage_reveal_box,
+html:not([add_reveal_homepage="true"]) #rys_homepage_reveal_box,
+html:not([remove_homepage="true"]) #rys_homepage_reveal_box,
+html:not([on_homepage="true"]) #rys_homepage_reveal_box,
+
+html:not([global_enable="true"]) #rys_sidebar_reveal_box,
+html:not([add_reveal_sidebar="true"]) #rys_sidebar_reveal_box,
+html:not([remove_sidebar="true"]) #rys_sidebar_reveal_box,
+html:not([on_video="true"]) #rys_sidebar_reveal_box,
+
+html:not([global_enable="true"]) #rys_end_of_video_reveal_box,
+html:not([add_reveal_end_of_video="true"]) #rys_end_of_video_reveal_box,
+html:not([remove_end_of_video="true"]) #rys_end_of_video_reveal_box,
+html:not([on_video="true"]) #rys_end_of_video_reveal_box,
+#movie_player:not(.ended-mode) #rys_end_of_video_reveal_box,
+
+html[foo="bar"] {
+	display: none;
+}
+
+
+/* Only show playlists */
+html[global_enable="true"][only_show_playlists="true"] ytd-guide-collapsible-section-entry-renderer.ytd-guide-section-renderer {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+
+/**********************
+ * Search engine mode *
+ **********************/
+
+html[global_enable="true"][search_engine_mode="true"] *,
+html[foobar] {
+	visibility: hidden;
+}
+
+/* Search header container */
+html[global_enable="true"][search_engine_mode="true"] #container.ytd-masthead,
+/* YouTube logo container */
+html[global_enable="true"][search_engine_mode="true"] ytd-topbar-logo-renderer,
+html[global_enable="true"][search_engine_mode="true"] ytd-topbar-logo-renderer *,
+/* Search bar container */
+html[global_enable="true"][search_engine_mode="true"] #center.ytd-masthead,
+html[global_enable="true"][search_engine_mode="true"] #center.ytd-masthead *,
+/* Settings button */
+html[global_enable="true"][search_engine_mode="true"] ytd-topbar-menu-button-renderer,
+html[global_enable="true"][search_engine_mode="true"] ytd-topbar-menu-button-renderer *,
+/* Settings popup menu */
+html[global_enable="true"][search_engine_mode="true"] ytd-popup-container,
+html[global_enable="true"][search_engine_mode="true"] ytd-popup-container *,
+/* Search results */
+html[global_enable="true"][search_engine_mode="true"] ytd-search,
+html[global_enable="true"][search_engine_mode="true"] ytd-search *,
+/* Video player */
+html[global_enable="true"][search_engine_mode="true"] ytd-watch-flexy,
+html[global_enable="true"][search_engine_mode="true"] ytd-watch-flexy *,
+/* Embedded player (youtube.com/embed/... inside other sites) */
+html[global_enable="true"][search_engine_mode="true"] body > #player,
+html[global_enable="true"][search_engine_mode="true"] body > #player *,
+html[global_enable="true"][search_engine_mode="true"] body > #player-controls,
+html[global_enable="true"][search_engine_mode="true"] body > #player-controls *,
+
+
+
+html[foo=bar] {
+	visibility: visible;
+}
+
+/* Homepage */
+html[global_enable="true"][search_engine_mode="true"] ytd-browse,
+/* Channel search results */
+html[global_enable="true"][search_engine_mode="true"] ytd-channel-renderer,
+/* Thumbnails */
+html[global_enable="true"][search_engine_mode="true"] ytd-thumbnail,
+/* video player */
+html[global_enable="true"][search_engine_mode="true"] .ytp-ce-element.ytp-ce-element,
+/* Next to video player */
+html[global_enable="true"][search_engine_mode="true"] #secondary,
+/* Below video player */
+html[global_enable="true"][search_engine_mode="true"] #top-row,
+html[global_enable="true"][search_engine_mode="true"] ytd-merch-shelf-renderer,
+/* Comments */
+html[global_enable="true"][search_engine_mode="true"] #comments,
+html[foobar] {
+	display: none;
+}
+
+/* Search results */
+html[global_enable="true"][search_engine_mode="true"] ytd-search,
+html[foobar] {
+	position: absolute;
+	left: 0;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+}
+
+html[global_enable="true"][search_engine_mode="true"] ytd-video-renderer,
+html[foobar] {
+	margin-top: 35px;
+}
+
+/* search header */
+html[global_enable="true"][search_engine_mode="true"] #container.ytd-masthead {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+
+	background-color: var(--yt-spec-base-background);
+}
+
+
+/**********
+ * Mobile *
+ **********
+ *
+ * Force mobile site:
+ * 			http://m.youtube.com/?persist_app=1&app=m
+ *
+ * Reset to desktop site:
+ * 			http://www.youtube.com/?persist_app=1&app=desktop
+ *
+ **********/
+
+html[global_enable="true"] ytm-companion-ad-renderer,
+html[global_enable="true"] ytm-promoted-sparkles-web-renderer,
+
+/* General */
+html[global_enable="true"][remove_all_shorts="true"] ytm-reel-shelf-renderer,
+html[global_enable="true"][remove_all_shorts="true"] ytm-search ytd-video-renderer[is_short="true"],
+html[global_enable="true"][remove_all_shorts="true"] ytm-search ytm-video-with-context-renderer[is_short="true"],
+html[global_enable="true"][remove_all_shorts="true"] ytm-search ytm-reel-shelf-renderer,
+
+/* Main */
+html[global_enable="true"][remove_homepage="true"] div[tab-identifier="FEwhat_to_watch"] .rich-grid-renderer-contents,
+html[global_enable="true"][remove_sidebar="true"] ytm-item-section-renderer[section-identifier="related-items"],
+
+/* Left Bar Navigation */
+html[global_enable="true"][remove_home_link="true"] ytm-pivot-bar-item-renderer:nth-child(1),
+html[global_enable="true"][remove_shorts_link="true"] ytm-pivot-bar-item-renderer:nth-child(2),
+html[global_enable="true"][remove_explore_link="true"] ytm-chip-cloud-chip-renderer[chip-style="STYLE_EXPLORE_LAUNCHER_CHIP"],
+
+/* Homepage */
+html[global_enable="true"][remove_header="true"] div[tab-identifier="FEwhat_to_watch"] div.chip-bar-contents,
+html[global_enable="true"][remove_infinite_scroll="true"] div.rich-grid-renderer-contents > ytm-continuation-item-renderer,
+html[global_enable="true"][remove_extra_rows="true"] div[tab-identifier="FEwhat_to_watch"] ytm-reel-shelf-renderer,
+
+/* Video Player */
+html[global_enable="true"][remove_comments="true"] ytm-comments-entry-point-header-renderer,
+html[global_enable="true"][remove_menu_buttons="true"] ytm-slim-video-action-bar-renderer,
+
+/* Search Results Page */
+html[global_enable="true"][remove_search_suggestions="true"] .searchbox-dropdown,
+html[global_enable="true"][remove_search_suggestions="true"] .ytSearchboxComponentSuggestionsContainer,
+html[global_enable="true"][remove_shorts_results="true"] ytm-search ytd-video-renderer[is_short="true"],
+html[global_enable="true"][remove_shorts_results="true"] ytm-search ytm-video-with-context-renderer[is_short="true"],
+html[global_enable="true"][remove_shorts_results="true"] ytm-search ytm-reel-shelf-renderer,
+
+html[global_enable="true"][foo=bar]
+
+{
+
+	display: none !important;
+
+}
+
+html[global_enable='true'][grayscale_mode='true']:not([grayscale_exempt='true']) ytd-app {
+	filter: grayscale(100%);
+}
+
+/* RYS UI Variables */
+:root {
+  --rys-primary: #065fd4;
+  --rys-text: #fff;
+  --rys-font: "Roboto", "Arial", sans-serif;
+  --rys-banner-height: 40px;
+}
+
+/* Announcement Banner on YouTube */
+.rys_announcement_banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--rys-primary);
+  font-size: 13px;
+  font-family: var(--rys-font);
+  z-index: 2350;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Push down YouTube's fixed header and content when banner is visible */
+html[rys-banner-visible="true"] #masthead-container,
+html[rys-banner-visible="true"] ytd-masthead {
+  top: var(--rys-banner-height) !important;
+}
+
+html[rys-banner-visible="true"] ytd-app {
+  margin-top: var(--rys-banner-height);
+}
+
+html[rys-banner-visible="true"] tp-yt-app-drawer #contentContainer,
+html[rys-banner-visible="true"] ytd-mini-guide-renderer {
+  margin-top: var(--rys-banner-height);
+}
+
+.rys_announcement_banner * {
+  color: var(--rys-text);
+}
+
+.rys_banner_logo {
+  width: 20px;
+  height: 20px;
+}
+
+.rys_banner_brand {
+  font-weight: 600;
+  margin-right: 8px;
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.rys_banner_message {
+  flex: 1;
+}
+
+.rys_banner_link {
+  text-decoration: underline;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.rys_banner_link:hover {
+  opacity: 1;
+}
+
+.rys_banner_dismiss {
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.rys_banner_dismiss:hover {
+  opacity: 1;
+}
+
+.rys_banner_close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.7;
+  line-height: 1;
+  color: var(--rys-text);
+}
+
+.rys_banner_close:hover {
+  opacity: 1;
+}

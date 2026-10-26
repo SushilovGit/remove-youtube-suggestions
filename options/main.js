@@ -230,7 +230,8 @@ function populateOptions(SECTIONS, headerSettings, SETTING_VALUES) {
   activeSidebar.innerHTML = '<span>active</span><span class="active_count"></span>';
   activeSidebar.addEventListener('click', activeSidebarListener);
 
-  sidebarTopRow.append(freeSidebar, allSidebar, activeSidebar);
+  // sidebarTopRow.append(freeSidebar, allSidebar, activeSidebar);
+  sidebarTopRow.append(allSidebar, activeSidebar);
   SIDEBAR.append(sidebarTopRow);
 
   // Add sections to the sidebar

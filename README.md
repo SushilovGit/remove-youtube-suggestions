@@ -9,6 +9,7 @@
         A browser extension that makes YouTube more user-friendly by removing
         distracting elements. This fork includes the full feature set of the
         Remove YouTube Suggestions project, including advanced settings.
+        (only Chrome)
       </p>
     </td>
   </tr>
@@ -17,6 +18,7 @@
 <p align="center">
     <img src="images/img/3.png">
 </p>
+
 
 <p align="center">
   <img src="images/img/1.png" alt="Preview 1" width="48%">

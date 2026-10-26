@@ -14,6 +14,7 @@
   </tr>
 </table>
 
+<img src="images/img/3.png">
 
 <p align="center">
   <img src="images/img/1.png" alt="Preview 1" width="48%">
